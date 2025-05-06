@@ -65,7 +65,7 @@ function App() {
   const handleSave = () => {
     const element = document.createElement('a')
     const file = new Blob([code], {type: 'text/plain'})
-    const extension = map.extensions((language === 'auto' ? 'txt' : language)[0])
+    const extension = language === 'auto' ? 'txt' : map.extensions(language)[0]
     element.href = URL.createObjectURL(file)
     element.download = `myCode.${extension}`
     document.body.appendChild(element)
