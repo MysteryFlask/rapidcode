@@ -1,10 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
-import Editor from 'react-simple-code-editor';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/default.css';
+import { useState, useEffect, useRef } from 'react'
+import Editor from 'react-simple-code-editor'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/default.css'
 import '@fontsource/fira-code'
 import '@fontsource/jetbrains-mono'
 import './style.css'
+import 'lang-map'
+import map from 'lang-map'
 
 function App() {
   const [code, setCode] = useState('')
@@ -63,8 +65,9 @@ function App() {
   const handleSave = () => {
     const element = document.createElement('a')
     const file = new Blob([code], {type: 'text/plain'})
+    const extension = map.extensions((language === 'auto' ? 'txt' : language)[0])
     element.href = URL.createObjectURL(file)
-    element.download = 'myCode.txt'
+    element.download = `myCode.${extension}`
     document.body.appendChild(element)
     element.click()
     document.body.removeChild(element)
